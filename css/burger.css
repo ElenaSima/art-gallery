@@ -1,0 +1,170 @@
+.burger {
+  position: relative;
+  z-index: 200;
+  display: block;
+  width: 25px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  color: var(--color-white);
+  background-color: transparent;
+  transition: background-color var(--time), outline var(--time);
+}
+
+.burger__line {
+  position: absolute;
+  top: calc(50% - var(--burger-line) / 2);
+  left: 0;
+  width: 100%;
+  height: var(--burger-line);
+  background-color: var(--color-white);
+  transition: background-color var(--time), opacity var(--time);
+  transform: scaleX(calc(16 / 25));
+  transform-origin: left;
+}
+
+.burger::before,
+.burger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: var(--burger-line);
+  background-color: var(--color-white);
+  transition: background-color var(--time);
+  transform-origin: left;
+}
+
+.burger::before {
+  top: 0;
+}
+
+.burger::after {
+  bottom: 0;
+  transform: scaleX(calc(10 / 25));
+}
+
+.burger:focus:not(:hover) {
+  outline: 3px solid var(--color-violet);
+  background-color: var(--color-violet);
+}
+
+.burger:hover .burger__line,
+.burger:hover::before,
+.burger:hover::after {
+  background-color: var(--color-light-purple);
+}
+
+.burger.is-opened .burger__line,
+.burger.is-closed .burger__line {
+  opacity: 0;
+}
+
+.is-opened.burger::before,
+.is-opened.burger::after,
+.is-closed.burger::before,
+.is-closed.burger::after {
+  transform-origin: center;
+}
+
+.is-opened.burger::before {
+  top: calc(50% - var(--burger-line) / 2);
+  transform: rotate(45deg);
+  animation-name: burger-before-open;
+  animation-duration: .3s;
+}
+
+.is-opened.burger::after {
+  bottom: calc(50% - var(--burger-line) / 2);
+  transform: scaleX(1) rotate(-45deg);
+  animation-name: burger-afrer-open;
+  animation-duration: .3s;
+}
+
+.is-closed.burger::before {
+  top: calc(50% - var(--burger-line) / 2);
+  transform: rotate(45deg);
+  animation-name: burger-before-close;
+  animation-duration: .3s;
+}
+
+.is-closed.burger::after {
+  bottom: calc(50% var(--burger-line) / 2);
+  transform: scaleX(1) rotate(-45deg);
+  animation-name: burger-afrer-close;
+  animation-duration: .3s;
+}
+
+@keyframes burger-before-open {
+  0% {
+    top: 0;
+    transform: rotate(0);
+  }
+
+  50% {
+    top: calc(50% - var(--burger-line) / 2);
+    transform: rotate(0);
+  }
+
+  100% {
+    top: calc(50% - var(--burger-line) / 2);
+    transform: rotate(45ged);
+  }
+}
+
+@keyframes burger-afrer-open {
+  0% {
+    bottom: 0;
+    transform: scaleX(calc(10 / 25)) rotate(0);
+  }
+
+  50% {
+    bottom: calc(50% - var(--burger-line) / 2);
+    transform: scaleX(1) rotate(0);
+  }
+
+  100% {
+    bottom: calc(50% - var(--burger-line) / 2);
+    transform: scaleX(1) rotate(-45ged);
+  }
+}
+
+@keyframes burger-before-close {
+  0% {
+    top: calc(50% - var(--burger-line) / 2);
+    transform: rotate(45ged);
+    transform-origin: center;
+  }
+
+  50% {
+    top: calc(50% - var(--burger-line) / 2);
+    transform: rotate(0);
+    transform-origin: center;
+  }
+
+  100% {
+    top: 0;
+    transform: rotate(0);
+    transform-origin: left;
+  }
+}
+
+@keyframes burger-afrer-close {
+  0% {
+    bottom: calc(50% - var(--burger-line) / 2);
+    transform: scaleX(1) rotate(-45ged);
+    transform-origin: center;
+  }
+
+  50% {
+    bottom: calc(50% - var(--burger-line) / 2);
+    transform: scaleX(1) rotate(0);
+    transform-origin: center;
+  }
+
+  100% {
+    bottom: 0;
+    transform: scaleX(calc(10 / 25)) rotate(0);
+    transform-origin: left;
+  }
+}
